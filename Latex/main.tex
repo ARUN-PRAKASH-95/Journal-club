@@ -1,0 +1,202 @@
+%----------------------------------------------------
+% A simple LaTeX tutorial for beginners and students to get started with LaTeX
+% @Author: Arun Prakash
+% @email: arun.prakash@imfd.tu-freiberg.de
+%----------------------------------------------------
+%
+% All LaTeX documents start with a certain class identifying the type of the document, ...
+% ... the font to be used, the paper to be used etc.
+\documentclass[a4paper,12pt,times]{article} % can also be book, report etc.
+
+% Additional packages that need to be used needs to be included here
+\usepackage{amsmath} % for enhanced math operations
+\usepackage{graphicx} % to include graphics
+\usepackage{multirow} % for merging multiple rows and columns in tables
+%\usepackage[abbr,square,agsm]{harvard} % for harvard style of citation
+            %the values in the square braces are the options to the package -- abbr denotes the abbreviated mode of citation, square -- for square braces in citations and agsm is the stly file for citation
+
+% Title part
+\title{A small tutorial to learn \LaTeX}
+\author{A. Prakash}
+%\date{}
+
+
+%------ Start of the main document structure
+\begin{document}
+\maketitle
+
+Some introductory text can be put in here. To input a new paragraph, an empty line needs to be input in the source text like this
+\begin{verbatim}
+paragraph 1 -- some text here
+
+paragraph 2 -- more text here
+\end{verbatim}
+
+Latex takes care of all formatting like justified text, fonts etc. These are already defined elsewhere (in the article class file)
+
+\section{Adding a new section}
+A new section can be added with the \emph{section} command. Subsequent sections can be added with \emph{subsection} and \emph{subsubsection} commands
+\begin{verbatim}
+\section{Main section}
+\subsection{First level sub section}
+\subsubsection{Second level sub section}
+\end{verbatim}
+
+\section{Compiling the main file}
+For traditional compiling, the command latex is used on the command prompt. When using this command, a dvi output file is generated. This can be viewed with xdvi under linux. Note that with this command, one can only insert *.ps or *.eps files into the document.
+
+A more enhanced way of compiling is the command pdflatex. With this, one obtains a *.pdf file as output. Additionally, this method has the advantage that *.jpg files can be directly inserted (*.tif and *.bmp files cannot be used). This method, nevertheless, does have its own disadvantages, which shall not be detailed here. As a beginner, one would anyway, not face major problems with pdflatex.
+
+\begin{verbatim}
+pc-p030(~/workdir/scratch/LaTeXtutorial) latex <filename.tex>
+
+pc-p030(~/workdir/scratch/LaTeXtutorial) pdflatex <filename.tex>
+\end{verbatim}
+
+\section{Typing code as is}
+Sometimes, we may need to input commands or some part of a program into the document. In order to let the compiler know that this part corresponds to text and not actual commands, they may be enclosed within the \emph{verbatim} environment. Note that anything which has a \emph{begin} and \emph{end} is referred to as environment
+
+\begin{verbatim}
+ \begin{verbatim}
+    put text to be reproduced as is here!!!
+ put <backslash> end{verbatim} here
+\end{verbatim}
+
+\section{Using a latex IDE}
+A Latex integrated development environment, called Kile, is available under kde-linux (SUSE Linux). Using an IDE helps beginners as a lot of commands for formulae, lists, enumerations etc. can be drawn from menus in the editor.
+
+\section{Equations}
+Equations can be inserted with the \emph{equation} environment. For inline equations enclose the equation between two \$ symbols, For e.g. $\gamma = \frac{\alpha}{\beta}$. For unnumbered equations use the  \emph{equation*} environment.
+\begin{equation}
+  L^{c}_{ij} = \frac{\partial \dot{u}_{i}^c}{\partial x_j}
+\end{equation}
+
+\begin{equation*}
+  L^{c}_{ij} = \sum_{s}\dot{\gamma} b^{s}_{i}n^{s}_{j}
+\end{equation*}
+
+\newpage
+\section{Inserting figures}\label{sec:InsertFig}
+Inserting figures can be done using the figure environment.
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.5\textwidth]{./MiMM_logo_transpBG-2.jpg}
+  \caption{The Micromechanical Materials Modelling Group}
+  \label{fig:IWMlogo}
+\end{figure}
+
+\section{Inserting tables}
+Use table and tabular environments for this
+\begin{table}[htbp]
+ \centering
+ \begin{tabular}[c]{|l||c|c|c|c|}
+   \hline
+   \multicolumn{5}{|c|}{{\bf T = $\mathbf{280}^{\circ}$C}} \\
+   \hline
+   Voce Parameter & \multirow{2}{*}{$\tau_0$} & \multirow{2}{*}{$\tau_1$} & \multirow{2}{*}{$\theta_0$} & \multirow{2}{*}{$\theta_1$} \\
+   \cline{1-1}Deformation mode & & & & \\
+   \hline
+   Basal     & 17 & 10 & 150 & 0 \\
+   Prismatic & 22 & 15 & 150 & 0 \\
+   Twinning  & 24 & 10 & 11  & 11 \\
+   Pyramidal & 45 & 50 & 330 & 0 \\
+   \hline
+   & & & & \vspace{-0.5ex}\\
+   \hline
+   RX-parameter & $E_{\textrm{crit}}$ & $C$ & $D$ & $B$ \\
+   \hline
+   & 2.40e4 & 1.15 & 0.08 & 1.5e-3\\
+   \hline
+ \end{tabular}
+ \caption{Material parameters used in a typical VPSC simulation}
+ \label{tab:MatParams}
+\end{table}
+
+\section{Lists and enumerations}
+For lists, use the \emph{itemize (bulleted)} or \emph{enumeration (more flexible with the pointers)} or \emph{description} environment. Some typical examples are shown below
+
+\noindent %this command removes the indentation of the first line of the paragraph
+Bulleted list
+\begin{itemize}
+ \item Bulleted list item no. 1
+ \item Bulleted list item no. 2
+ \item Bulleted list item no. 3
+\end{itemize}
+
+\noindent
+Itemized list with alphabets
+\begin{itemize}
+ \item[a)] Itemized list item no. 1
+ \item[b)] Itemized list item no. 2
+ \item[c)] Itemized list item no. 3
+\end{itemize}
+
+\noindent
+Enumerated list
+\begin{enumerate}
+ \item Enum list item 1
+ \item Enum list item 1
+ \item Enum list item 1
+\end{enumerate}
+
+\noindent
+Enumerated list with roman pointers
+\begin{enumerate}
+ \item[i)] Enum list item 1
+ \item[ii)] Enum list item 1
+ \item[iii)] Enum list item 1
+\end{enumerate}
+
+
+\section{Cross-referencing, citations and bibliography}
+\subsection{Cross-referencing}
+A picture or table or, for that matter, any item can be cross reference using the \emph{ref} command. The text inside the \emph{ref} command is the label given to the corresponding referrant (given through the \emph{label} command).
+
+For e.g., we refer to figure~\ref{fig:IWMlogo}, which is the logo of our institute and can be found in this document under section~\ref{sec:InsertFig}. Table~\ref{tab:MatParams} gives the material parameters required for a VPSC simulation of \emph{hcp} materials. One might have to recompile it a few times (I guess 3 times) for the cross referencing to work.
+
+\subsection{Bibliography}
+The best way to make a bibliography is to use BibTeX. There are other ways, which I am not going to detail here.
+
+For using the BibTeX method, a database containing the required references has to be created. This is very handy as the database can contain all articles, books, technical reports, manuals, theses etc. in itself. Only the ones referred to shall be used in the document. An example BibTeX file has been placed in this folder for reference purposes (file \emph{BibTEXexampleFilePrakash.bib}).
+
+The BibTeX file is then to be included into the main file of the document using the \emph{bibliography} command. This is to be done just before the end of the document. Additionally, a bibliography stylefile is also to be specified. I have used the \emph{harvard} style of citation here. The requisite style file has been included in the document preamble through the \emph{usepackage} command.
+
+I must add here that the BibTeX database can be created using the JabRef software. Just type <jabref> on your command prompt to run the software.
+
+Whilst compiling, the command \emph{bibtex} is to be used. With the traditional \LaTeX compiler, one uses the following
+\begin{verbatim}
+pc-p030(~/workdir/scratch/LaTeXtutorial) latex <filename.tex>
+pc-p030(~/workdir/scratch/LaTeXtutorial) bibtex <filename.tex>
+pc-p030(~/workdir/scratch/LaTeXtutorial) latex <filename.tex>
+pc-p030(~/workdir/scratch/LaTeXtutorial) latex <filename.tex>
+\end{verbatim}
+Replace latex with pdflatex when using the pdflatex compiler. With the Kile IDE, these sequence of commands can be set to run \emph{a-priori}.
+
+\subsection{Citations}
+To cite a reference, just use the \emph{cite} command. For e.g., the BibTex file in this folder has the following entries
+\begin{enumerate}
+ \item[a)] \cite{prakash.etal.2008a}: An article on VPSC simulations with twinning models in TWIP steels
+ \item[b)] \cite{prakash.etal.2007}: A conference proceedings paper from STEELSIM 2007 held in Graz, Austria
+ \item[c)] \cite{prakash.lebensohn.2009}: A recent paper submitted to MSMSE, on comparison of FE and FFT methods of computation
+ \item[d)] \cite{prakash.etal.2009}: An article on SXFEM simulations for Mg alloy AZ31
+ \item[e)] \cite{lebensohn.tome.1993}: The original VPSC article
+ \item[f)] \cite{kocks.etal.1998}: Book entry -- the texture and anisotropy book of Kocks, Tom\'e and Wenk
+ \item[g)] \cite{allain.2004}: Phd thesis entry -- of Sebastian Allain, also an e.g. for using French words (esp. the accents)
+ \item[d)] \cite{tome.lebensohn.2003a}: VPSC manual
+\end{enumerate}
+The \emph{string} commands in the BibTeX file can be used for abbreviating text, especially journal names.
+
+For improved presentability, I usually reccommend that the citations be in small caps, i.e.
+\begin{verbatim}
+\textsc{\cite{prakash.etal.2009}}
+\end{verbatim}
+which yields \textsc{\cite{prakash.etal.2009}}. There are a host of other commands when using the harvard style of citation. Look into the correspoding references.
+
+\section{Disclaimer}
+This tutorial is intended to help students get started with \LaTeX. I do not claim this tutorial to be complete. For more information, please refer standard literature.
+
+\bibliographystyle{unsrt}
+\bibliography{BibTeXexampleFilePrakash} %extension must not be specified
+
+\end{document}
+
